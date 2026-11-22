@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0b12">
+<title>Revive Creator Network</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #0b0b12;
+  color: #f5f5f7;
+  min-height: 100vh;
+}
+
+:root {
+  --purple: #8b5cf6;
+  --purple-light: #a78bfa;
+  --background: #0b0b12;
+  --panel: #15151f;
+  --border: #292938;
+  --muted: #9292a5;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background: #101019;
+  border-right: 1px solid var(--border);
+  padding: 25px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 35px;
+}
+
+.logo-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #8b5cf6, #5b21b6);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.logo h1 {
+  font-size: 19px;
+  letter-spacing: 1px;
+}
+
+.logo span {
+  color: var(--purple-light);
+}
+
+.nav-title {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  margin: 20px 10px 10px;
+}
+
+.nav-item {
+  padding: 13px 14px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  color: #c3c3d0;
+  text-decoration: none;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nav-item.active {
+  background: rgba(139, 92, 246, 0.15);
+  color: #c4a8ff;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.nav-item:hover {
+  background: #1b1b29;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.main {
+  flex: 1;
+  padding: 30px;
+  min-width: 0;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.welcome h2 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.welcome p {
+  color: var(--muted);
+}
+
+.profile {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.card-label {
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.card-value {
+  font-size: 29px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.card-change {
+  font-size: 12px;
+  color: #a78bfa;
+}
+
+.section {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 22px;
+  margin-bottom: 20px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h3 {
+  font-size: 18px;
+}
+
+.btn {
+  background: var(--purple);
+  color: white;
+  border: none;
+  border-radius: 9px;
+  padding: 11px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #7c3aed;
+}
+
+.activity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.activity:last-child {
+  border-bottom: none;
+}
+
+.activity-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background: rgba(139, 92, 246, 0.15);
+  display: grid;
+  place-items: center;
+}
+
+.activity-text {
+  flex: 1;
+}
+
+.activity-text strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.activity-text small {
+  color: var(--muted);
+}
+
+.status {
+  background: rgba(34, 197, 94, 0.12);
+  color: #4ade80;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.quick-card {
+  border: 1px solid var(--border);
+  background: #11111a;
+  border-radius: 12px;
+  padding: 18px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.quick-card:hover {
+  border-color: var(--purple);
+  transform: translateY(-2px);
+}
+
+.quick-card span {
+  font-size: 25px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.quick-card strong {
+  display: block;
+  margin-bottom: 7px;
+}
+
+.quick-card small {
+  color: var(--muted);
+}
+
+.mobile-menu {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 210px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  .sidebar {
+    display: none;
+  }
+
+  .main {
+    padding: 18px;
+  }
+
+  .mobile-menu {
+    display: block;
+    background: var(--panel);
+    color: white;
+    border: 1px solid var(--border);
+    padding: 10px;
+    border-radius: 9px;
+    font-size: 20px;
+  }
+
+  .topbar {
+    gap: 12px;
+  }
+
+  .welcome h2 {
+    font-size: 23px;
+  }
+
+  .welcome p {
+    font-size: 13px;
+  }
+
+  .profile {
+    display: none;
+  }
+
+  .cards {
+    gap: 10px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .card-value {
+    font-size: 24px;
+  }
+
+  .quick-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<aside class="sidebar">
+
+  <div class="logo">
+    <div class="logo-icon">R</div>
+    <h1>REVIVE <span>NETWORK</span></h1>
+  </div>
+
+  <div class="nav-title">MAIN MENU</div>
+
+  <a class="nav-item active">▦ Dashboard</a>
+  <a class="nav-item">♙ Creators</a>
+  <a class="nav-item">♧ Managers</a>
+  <a class="nav-item">♢ Teams</a>
+
+  <div class="nav-title">OPERATIONS</div>
+
+  <a class="nav-item">⚔ Battles</a>
+  <a class="nav-item">▣ Events</a>
+  <a class="nav-item">◈ Rankings</a>
+  <a class="nav-item">◎ Goals & Incentives</a>
+
+  <div class="nav-title">COMMUNITY</div>
+
+  <a class="nav-item">▤ Announcements</a>
+  <a class="nav-item">✉ Messages</a>
+
+  <div class="sidebar-bottom">
+    <a class="nav-item">⚙ Settings</a>
+    <a class="nav-item">↪ Logout</a>
+  </div>
+
+</aside>
+
+<main class="main">
+
+  <div class="topbar">
+
+    <button class="mobile-menu" onclick="alert('Mobile navigation coming soon!')">
+      ☰
+    </button>
+
+    <div class="welcome">
+      <h2>Welcome to Revive 👋</h2>
+      <p>Your creator network at a glance.</p>
+    </div>
+
+    <div class="profile">
+      <div class="avatar">R</div>
+      <div>
+        <strong>Revive Admin</strong><br>
+        <small style="color:var(--muted)">Network Owner</small>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-label">Total Creators</div>
+      <div class="card-value">0</div>
+      <div class="card-change">Your creator network</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Active Managers</div>
+      <div class="card-value">0</div>
+      <div class="card-change">Management team</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Diamonds This Month</div>
+      <div class="card-value">0</div>
+      <div class="card-change">Monthly performance</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Scheduled Battles</div>
+      <div class="card-value">0</div>
+      <div class="card-change">Upcoming matchups</div>
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <div class="section-header">
+      <h3>Quick Actions</h3>
+    </div>
+
+    <div class="quick-grid">
+
+      <div class="quick-card" onclick="alert('Creator management will be built next!')">
+        <span>♙</span>
+        <strong>Add Creator</strong>
+        <small>Manage your network creators</small>
+      </div>
+
+      <div class="quick-card" onclick="alert('Battle scheduling will be built next!')">
+        <span>⚔</span>
+        <strong>Schedule Battle</strong>
+        <small>Organise creator matchups</small>
+      </div>
+
+      <div class="quick-card" onclick="alert('Announcements will be built next!')">
+        <span>▤</span>
+        <strong>Post Announcement</strong>
+        <small>Keep your network updated</small>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <div class="section-header">
+      <h3>Recent Activity</h3>
+      <button class="btn" onclick="alert('Activity feed coming soon!')">
+        View All
+      </button>
+    </div>
+
+    <div class="activity">
+      <div class="activity-icon">🚀</div>
+      <div class="activity-text">
+        <strong>Revive Creator Network created</strong>
+        <small>Your new network management platform is ready to begin.</small>
+      </div>
+      <span class="status">Active</span>
+    </div>
+
+    <div class="activity">
+      <div class="activity-icon">👥</div>
+      <div class="activity-text">
+        <strong>Creator management</strong>
+        <small>Your creator database will appear here.</small>
+      </div>
+    </div>
+
+    <div class="activity">
+      <div class="activity-icon">⚔</div>
+      <div class="activity-text">
+        <strong>Battles and events</strong>
+        <small>Your upcoming battles will appear here.</small>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <div class="section-header">
+      <h3>Network Overview</h3>
+    </div>
+
+    <p style="color:var(--muted); line-height:1.7">
+      Welcome to Revive. This platform will bring your creators,
+      managers, battles, events, rankings, goals and announcements
+      together in one place.
+    </p>
+
+  </div>
+
+</main>
+</div>
+
+</body>
+</html>
